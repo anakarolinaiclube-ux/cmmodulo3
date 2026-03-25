@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Módulo 01: O Kit de Ferramentas — MontadorPRO</title>
+    <title>Módulo 03: Técnicas de Montagem — MontadorPRO</title>
     
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +25,8 @@
             --green-soft:    rgba(16, 185, 129, 0.15);
             --red:           #ef4444;
             --red-soft:      rgba(239, 68, 68, 0.1);
+            --purple:        #8b5cf6;
+            --purple-soft:   rgba(139, 92, 246, 0.1);
             --text-main:     #f8fafc;
             --text-muted:    #94a3b8;
             --text-light:    #cbd5e1;
@@ -72,9 +74,9 @@
         /* ── HERO SECTION ── */
         .hero { padding: 60px 0 40px; text-align: center; border-bottom: 1px solid var(--border-color); }
         .mod-badge {
-            display: inline-block; background: var(--orange-soft); color: var(--orange);
+            display: inline-block; background: var(--purple-soft); color: var(--purple);
             font-family: var(--font-title); font-weight: 700; font-size: 0.85rem;
-            padding: 6px 16px; border-radius: 30px; margin-bottom: 20px; border: 1px solid rgba(249,115,22,0.3);
+            padding: 6px 16px; border-radius: 30px; margin-bottom: 20px; border: 1px solid rgba(139, 92, 246, 0.3);
         }
         .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 16px; letter-spacing: -1px; }
         .hero p { font-size: 1.15rem; color: var(--text-light); max-width: 700px; margin: 0 auto 30px; }
@@ -98,71 +100,54 @@
             font-size: 1.2rem; font-style: italic; color: var(--text-main); border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: 30px 0;
         }
 
-        /* ── CARDS ERROS & CATEGORIAS ── */
+        /* ── CARDS (GRID 2/3) ── */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 30px; }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 30px; }
         
-        .error-card {
-            background: var(--bg-card); border: 1px solid var(--border-color); border-top: 4px solid var(--red);
-            padding: 24px; border-radius: var(--radius-md); transition: transform 0.3s;
+        .tech-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 32px 24px; border-radius: var(--radius-md); transition: transform 0.3s;
+            position: relative; overflow: hidden;
         }
-        .error-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .error-card h4 { color: var(--text-main); margin-bottom: 12px; font-size: 1.1rem; }
-        .error-card i { color: var(--red); margin-right: 8px; }
-        .error-card p { font-size: 0.95rem; color: var(--text-muted); }
-
-        .cat-card {
-            background: linear-gradient(to bottom, var(--bg-card), var(--bg-dark));
-            border: 1px solid var(--border-color); padding: 32px 24px; border-radius: var(--radius-md); text-align: center; position: relative;
+        .tech-card:hover { transform: translateY(-5px); border-color: var(--orange); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .tech-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--orange), transparent);
         }
-        .cat-card.highlight { border-color: var(--orange); box-shadow: 0 0 30px rgba(249,115,22,0.1); }
-        .cat-icon { font-size: 2.5rem; color: var(--text-light); margin-bottom: 16px; }
-        .cat-card.highlight .cat-icon { color: var(--orange); }
-        .cat-card h3 { font-size: 1.3rem; margin-bottom: 8px; }
-        .cat-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
-        .cat-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; background: var(--bg-card-hover); }
-        .cat-card.highlight .cat-badge { background: var(--orange); color: #fff; }
-
-        /* ── LISTA DE FERRAMENTAS (GRID) ── */
-        .tools-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        .tool-item {
-            display: flex; gap: 24px; background: var(--bg-card); padding: 24px;
-            border-radius: var(--radius-md); border: 1px solid var(--border-color); align-items: flex-start;
-            transition: all 0.3s ease;
-        }
-        .tool-item:hover { border-color: var(--orange); background: var(--bg-card-hover); }
-        .tool-img {
-            width: 70px; height: 70px; border-radius: var(--radius-sm); background: var(--bg-dark);
-            display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--orange); flex-shrink: 0;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .tool-info h4 { font-size: 1.25rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .tool-info h4 span { font-size: 0.8rem; background: var(--bg-dark); padding: 2px 8px; border-radius: 4px; color: var(--text-muted); }
-        .tool-info p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 12px; }
+        .tech-card h4 { color: var(--text-main); margin-bottom: 16px; font-size: 1.3rem; display: flex; align-items: center; gap: 12px;}
+        .tech-card i { color: var(--orange); font-size: 1.5rem; }
+        .tech-card p { font-size: 0.95rem; color: var(--text-light); line-height: 1.6; }
         
+        /* ── PRO TIPS & ALERTAS ── */
         .pro-tip {
-            background: rgba(16, 185, 129, 0.1); border-left: 3px solid var(--green); padding: 12px 16px;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.85rem; color: #a7f3d0; display: flex; gap: 10px; align-items: flex-start;
+            background: rgba(16, 185, 129, 0.1); border-left: 3px solid var(--green); padding: 20px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.95rem; color: #a7f3d0; display: flex; gap: 16px; align-items: flex-start; margin-top: 24px;
         }
-        .pro-tip i { color: var(--green); margin-top: 3px; }
+        .pro-tip i { color: var(--green); margin-top: 4px; font-size: 1.4rem; }
+        .pro-tip strong { color: var(--green); display: block; margin-bottom: 4px; font-family: var(--font-title); font-size: 1.05rem; }
 
-        /* ── TABELAS ── */
-        .table-responsive { width: 100%; overflow-x: auto; margin-top: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-color); }
-        table { width: 100%; border-collapse: collapse; min-width: 600px; text-align: left; background: var(--bg-card); }
-        th, td { padding: 16px 20px; border-bottom: 1px solid var(--border-color); }
-        th { background: rgba(0,0,0,0.2); font-family: var(--font-title); color: var(--orange); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
-        td { font-size: 0.95rem; color: var(--text-light); }
-        tr:last-child td { border-bottom: none; }
-        .td-alert { color: var(--red); font-weight: 700; background: var(--red-soft); border-radius: 4px; padding: 2px 8px; display: inline-block; font-size: 0.8rem; }
-        
-        /* ── LISTA DO QUE NÃO COMPRAR ── */
-        .dont-buy-list { display: flex; flex-direction: column; gap: 16px; }
-        .dont-buy-card {
-            display: flex; gap: 16px; padding: 20px; background: rgba(239, 68, 68, 0.05);
-            border: 1px solid rgba(239, 68, 68, 0.2); border-radius: var(--radius-md);
+        .alert-box {
+            background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius-md); padding: 20px; display: flex; gap: 16px; align-items: flex-start; margin-top: 30px;
         }
-        .dont-buy-card i { color: var(--red); font-size: 1.5rem; margin-top: 2px; }
-        .dont-buy-card h4 { color: #fca5a5; margin-bottom: 6px; }
-        .dont-buy-card p { font-size: 0.9rem; color: var(--text-muted); }
+        .alert-box i { color: var(--red); font-size: 1.5rem; margin-top: 2px; }
+        .alert-box h4 { color: #fca5a5; margin-bottom: 8px; font-size: 1.1rem; }
+        .alert-box p { color: var(--text-light); font-size: 0.9rem; margin: 0; }
+
+        /* ── LISTA PASSOS ── */
+        .step-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+        .step-item {
+            display: flex; gap: 16px; background: rgba(0,0,0,0.2); padding: 20px;
+            border-radius: var(--radius-md); border: 1px solid var(--border-color); align-items: center;
+        }
+        .step-num {
+            width: 40px; height: 40px; background: var(--bg-dark); color: var(--orange);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-title); font-weight: 800; font-size: 1.2rem; flex-shrink: 0;
+            border: 2px solid var(--border-color);
+        }
+        .step-text p { margin: 0; font-size: 0.95rem; color: var(--text-light); }
+        .step-text strong { color: var(--text-main); }
 
         /* ── CHECKLIST INTERATIVO ── */
         .checklist-wrapper {
@@ -193,7 +178,7 @@
         }
         .cl-item.checked .cl-text { text-decoration: line-through; color: var(--text-muted); }
         
-        .cl-tag { font-size: 0.75rem; background: var(--bg-card); padding: 4px 10px; border-radius: 20px; color: var(--orange); font-weight: 700; }
+        .cl-tag { font-size: 0.75rem; background: var(--bg-card); padding: 4px 10px; border-radius: 20px; color: var(--orange); font-weight: 700; white-space: nowrap; }
         
         .cl-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); }
         .btn-clear { background: transparent; color: var(--text-muted); border: none; cursor: pointer; font-size: 0.9rem; transition: color 0.2s; }
@@ -210,9 +195,7 @@
         /* RESPONSIVO */
         @media (max-width: 768px) {
             .hero { padding: 40px 0 30px; }
-            .hero h1 { font-size: 2rem; }
-            .tool-item { flex-direction: column; gap: 16px; }
-            .tool-img { width: 60px; height: 60px; font-size: 1.5rem; }
+            .hero h1 { font-size: 2.2rem; }
             .checklist-wrapper { padding: 24px; }
             .cl-item { flex-direction: column; align-items: flex-start; gap: 12px; }
             .cl-tag { align-self: flex-start; margin-left: 42px; }
@@ -234,299 +217,152 @@
             
             <!-- HERO -->
             <section class="hero" style="border-bottom: none; padding-bottom: 20px;">
-                <div class="mod-badge">MÓDULO 01</div>
-                <h1>O Kit de Ferramentas</h1>
-                <p>O que você realmente precisa comprar (gastando pouco) e o que é puro desperdício de dinheiro para iniciantes.</p>
+                <div class="mod-badge"><i class="fas fa-hammer" style="margin-right: 6px;"></i> FASE 2: A PRÁTICA</div>
+                <h1>Técnicas de Montagem</h1>
+                <p>O núcleo do curso: como alinhar portas, regular dobradiças, instalar corrediças com perfeição e salvar peças que vieram com defeito de fábrica.</p>
                 
                 <div class="meta-info">
-                    <div class="meta-item"><i class="fas fa-layer-group"></i> Fase 1: A Preparação</div>
-                    <div class="meta-item"><i class="fas fa-user-graduate"></i> Nível: Iniciante</div>
-                    <div class="meta-item"><i class="far fa-clock"></i> Leitura: 1–2 horas</div>
+                    <div class="meta-item"><i class="fas fa-tools"></i> Módulo 03 de 05</div>
+                    <div class="meta-item"><i class="fas fa-user-cog"></i> Nível: Intermediário</div>
+                    <div class="meta-item"><i class="far fa-clock"></i> Leitura: 2 horas</div>
                 </div>
             </section>
 
-            <!-- CAP 1: IMPORTÂNCIA -->
+            <!-- CAP 1: DOBRADIÇAS E PORTAS -->
             <section id="cap1">
                 <div class="sec-header">
-                    <h2 class="sec-title"><i class="fas fa-lightbulb"></i> A Ferramenta Certa</h2>
+                    <h2 class="sec-title"><i class="fas fa-door-open"></i> O Segredo das Dobradiças</h2>
+                    <p>O cliente julga o seu trabalho pelas portas. Se elas estiverem raspando ou tortas, o móvel parece mal montado. Toda dobradiça caneco tem <strong>3 parafusos de regulagem</strong>. Dominá-los é obrigatório.</p>
                 </div>
-                
-                <p>Imagine contratar um médico que aparece na cirurgia sem bisturi. Parece absurdo, certo? Na montagem de móveis, usar a ferramenta errada é exatamente isso: você até pode terminar o trabalho, mas o resultado será inferior, o tempo será o dobro e o risco de errar — e ter que recomprar peças — é muito maior.</p>
-                
-                <p>A boa notícia é que você <strong>não precisa gastar uma fortuna</strong>. Um kit básico e bem escolhido custa entre R$ 200 e R$ 400 e serve para 95% dos serviços que você vai encontrar nos primeiros meses.</p>
+
+                <div class="grid-3">
+                    <div class="tech-card">
+                        <h4><i class="fas fa-arrows-alt-h"></i> Parafuso Frontal</h4>
+                        <p><strong>(Ajuste Lateral):</strong> É o parafuso do meio. Ele afasta ou aproxima a porta da lateral do móvel. Ideal para fechar aquele "vão" entre duas portas ou impedir que raspem uma na outra.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4><i class="fas fa-arrows-alt-v"></i> Parafusos da Base</h4>
+                        <p><strong>(Ajuste de Altura):</strong> São os dois parafusos que prendem a dobradiça na madeira. Afrouxe-os levemente para subir ou descer a porta inteira milímetros para cima ou para baixo.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4><i class="fas fa-compress-arrows-alt"></i> Parafuso Traseiro</h4>
+                        <p><strong>(Ajuste de Profundidade):</strong> Fica no fundo da dobradiça. Ele empurra a porta para fora ou puxa para dentro. Usado quando a porta está "batendo" e não fecha direito.</p>
+                    </div>
+                </div>
 
                 <div class="quote-box">
-                    "A ferramenta certa não é a mais cara — é a que resolve o problema sem criar outro."
-                </div>
-
-                <h3 style="margin: 40px 0 20px;">Os 3 erros mais comuns do iniciante:</h3>
-                <div class="grid-3">
-                    <div class="error-card">
-                        <h4><i class="fas fa-shopping-cart"></i> 1. Comprar demais</h4>
-                        <p>É muito tentador montar um arsenal completo antes do primeiro serviço. O resultado? Dinheiro preso em ferramentas que você talvez nunca use.</p>
-                    </div>
-                    <div class="error-card">
-                        <h4><i class="fas fa-tags"></i> 2. Comprar barato demais</h4>
-                        <p>Chave de fenda de R$ 5 arrasa parafusos, danifica peças e gera cliente insatisfeito. Existem faixas de preço inteligentes que vamos mostrar aqui.</p>
-                    </div>
-                    <div class="error-card">
-                        <h4><i class="fas fa-box-open"></i> 3. Ignorar o armazenamento</h4>
-                        <p>Ferramenta sem organização é ferramenta perdida. Uma simples bolsa de lona já resolve o problema e passa enorme profissionalismo ao cliente.</p>
-                    </div>
+                    "A regulagem de portas só deve ser feita DEPOIS que o móvel estiver no seu local definitivo. Se você regular a porta e depois arrastar o guarda-roupas, ele vai desalinhar de novo."
                 </div>
             </section>
 
-            <!-- CAP 2: AS 3 CATEGORIAS -->
+            <!-- CAP 2: CORREDIÇAS DE GAVETA -->
             <section id="cap2">
                 <div class="sec-header">
-                    <h2 class="sec-title"><i class="fas fa-sitemap"></i> As 3 Categorias do Kit</h2>
-                    <p>Para facilitar a sua organização mental e financeira, dividimos o kit baseando-se em urgência e frequência de uso.</p>
+                    <h2 class="sec-title"><i class="fas fa-layer-group"></i> Dominando as Corrediças</h2>
+                    <p>Gavetas que emperram ou ficam tortas são o segundo maior pesadelo. A instalação exige método, não "olhômetro".</p>
                 </div>
 
-                <div class="grid-3">
-                    <div class="cat-card highlight">
-                        <div class="cat-icon"><i class="fas fa-toolbox"></i></div>
-                        <h3>Nível 1</h3>
-                        <p>Ferramentas que aparecem em 100% dos serviços. <strong>Sem isso, não trabalha.</strong></p>
-                        <span class="cat-badge">COMPRAR AGORA</span>
+                <div class="step-list">
+                    <div class="step-item">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <p><strong>Desmembre a Telescópica:</strong> Corrediças telescópicas possuem uma trava de plástico preta no meio. Aperte-a para soltar o "trilho fino" (que vai na gaveta) do "trilho grosso" (que vai no móvel).</p>
+                        </div>
                     </div>
-                    <div class="cat-card">
-                        <div class="cat-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        <h3>Nível 2</h3>
-                        <p>Aumentam velocidade e qualidade. Aparecem em 70% dos serviços no dia a dia.</p>
-                        <span class="cat-badge" style="color:var(--text-light)">COMPRAR EM BREVE</span>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <p><strong>Use a Linha de Furação:</strong> A maioria das laterais de gaveta tem um risco ou furos rasos indicando o centro exato. Alinhe os furos do trilho fino exatamente nessa marcação.</p>
+                        </div>
                     </div>
-                    <div class="cat-card">
-                        <div class="cat-icon"><i class="fas fa-crown"></i></div>
-                        <h3>Nível 3</h3>
-                        <p>Especialização. Usado para cozinhas planejadas complexas ou closets sob medida.</p>
-                        <span class="cat-badge" style="color:var(--text-light)">SÓ SE NECESSÁRIO</span>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-text">
+                            <p><strong>Fixação Frontal Faceada:</strong> O trilho deve começar rente (faceado) à parte da frente da madeira. Se ficar para trás, a gaveta vai afundar ao fechar. Se ficar para frente, a gaveta não vai fechar completamente.</p>
+                        </div>
                     </div>
                 </div>
-                
-                <p style="margin-top: 30px; text-align: center; color: var(--text-muted);">
-                    <em>Neste módulo, o foco total é no <strong>Nível 1</strong>. Os Níveis 2 e 3 serão abordados nos módulos avançados.</em>
-                </p>
+
+                <div class="pro-tip">
+                    <i class="fas fa-ruler"></i>
+                    <div>
+                        <strong>Dica PRO: O Truque do Gabarito</strong><br>
+                        Se o móvel não vier com furação prévia para as corrediças na lateral interna, não meça com a trena. Corte um pedaço de madeira de sucata (ou papelão duro) no tamanho exato da altura que você quer. Apoie a corrediça em cima desse "gabarito" e parafuse. Repita do outro lado. 100% de precisão e alinhamento perfeito sem medir nada!
+                    </div>
+                </div>
             </section>
 
-            <!-- CAP 3: LISTA DETALHADA -->
+            <!-- CAP 3: ESQUADRO E FUNDO -->
             <section id="cap3">
                 <div class="sec-header">
-                    <h2 class="sec-title"><i class="fas fa-list-check"></i> Ferramentas Obrigatórias</h2>
-                    <p>O arsenal exato que você precisa colocar na mochila hoje mesmo.</p>
+                    <h2 class="sec-title"><i class="fas fa-vector-square"></i> O Esquadro Perfeito</h2>
+                    <p>Você montou tudo, mas o guarda-roupas parece um "paralelogramo" pendendo para um lado? O problema está na pregagem do fundo. O fundo é o que trava a estrutura do móvel.</p>
                 </div>
 
-                <div class="tools-grid">
-                    
-                    <div class="tool-item">
-                        <div class="tool-img"><i class="fas fa-drill"></i></div>
-                        <div class="tool-info">
-                            <h4>01. Furadeira / Parafusadeira Bivolt <span>A Rainha do Kit</span></h4>
-                            <p>Usada em 100% dos serviços. Escolha um modelo com bateria de <strong>Lítio (18V ou 20V)</strong> pois dura mais, carrega rápido e não "vicia". Marcas recomendadas para iniciar: Vonder, Schulz e Black&Decker. Evite as de R$ 80 vendidas em supermercado, elas morrem rápido sob uso contínuo.</p>
-                            <div class="pro-tip">
-                                <i class="fas fa-star"></i>
-                                <span><strong>Dica PRO:</strong> Baterias de Lítio são essenciais. Baterias de NiCd (antigas) descarregam sozinhas na maleta e vão te deixar na mão no meio do serviço.</span>
-                            </div>
-                        </div>
+                <div class="grid-2">
+                    <div class="tech-card">
+                        <h4><i class="fas fa-times"></i> A Regra do "X"</h4>
+                        <p>Antes de pregar o fundo (Eucatex), pegue sua trena e meça a diagonal do móvel de uma ponta à outra (Ex: Canto Superior Esquerdo até Canto Inferior Direito). Depois meça a outra diagonal. <strong>Se as duas medidas baterem, o móvel está no esquadro absoluto.</strong> Se uma estiver maior, empurre o móvel levemente para o lado até igualar.</p>
                     </div>
-
-                    <div class="tool-item">
-                        <div class="tool-img"><i class="fas fa-screwdriver"></i></div>
-                        <div class="tool-info">
-                            <h4>02. Jogo de Brocas + Chaves Manuais <span>O Ajuste Fino</span></h4>
-                            <p><strong>Brocas:</strong> Pelo menos 10 brocas (3mm a 10mm). Brocas de tungstênio custam mais mas duram o triplo. Nunca use broca de madeira em metal.<br>
-                            <strong>Chaves:</strong> Philips e Fenda (P, M e G). Mesmo com a máquina, você precisa delas para ajustes finos em dobradiças e locais estreitos.</p>
-                            <div class="pro-tip">
-                                <i class="fas fa-star"></i>
-                                <span><strong>Dica PRO:</strong> Compre chaves com ponta magnética (imantada). Isso evita que o parafuso caia e risque a madeira ou se perca no chão.</span>
-                            </div>
-                        </div>
+                    <div class="tech-card">
+                        <h4><i class="fas fa-hammer"></i> Distância dos Pregos</h4>
+                        <p>Pregos no fundo não são só para "tapar o buraco", são estrutura. Coloque um prego a cada 10 a 15 centímetros. Se o fabricante mandou poucos pregos, <strong>use os seus do kit de emergência</strong>. Um fundo mal pregado resulta num móvel que balança como gelatina.</p>
                     </div>
+                </div>
 
-                    <div class="tool-item">
-                        <div class="tool-img"><i class="fas fa-ruler"></i></div>
-                        <div class="tool-info">
-                            <h4>03. Trena (5m) & Nível de Bolha (60cm) <span>A Precisão</span></h4>
-                            <p><strong>Trena:</strong> Prefira com trava e fita larga (25mm+), pois ela fica estendida no ar sem dobrar, facilitando medir sozinho.<br>
-                            <strong>Nível:</strong> Porta torta é o pesadelo do montador. Um nível simples de alumínio de 60cm resolve tudo.</p>
-                            <div class="pro-tip">
-                                <i class="fas fa-star"></i>
-                                <span><strong>Dica PRO:</strong> Para testar se o nível que você está comprando é bom, coloque-o na prateleira da loja, veja a bolha, depois vire-o ao contrário no mesmo lugar. A bolha deve ficar na exata mesma posição.</span>
-                            </div>
-                        </div>
+                <div class="alert-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <h4>Atenção às Prateleiras Fixas</h4>
+                        <p>Quando for pregar o fundo, cuidado extra para não errar a mira do martelo e o prego varar para dentro do móvel (furando a prateleira e rasgando o MDF branco). Marque a linha da prateleira por fora com um lápis antes de pregar.</p>
                     </div>
-
-                    <div class="tool-item">
-                        <div class="tool-img"><i class="fas fa-hammer"></i></div>
-                        <div class="tool-info">
-                            <h4>04. Martelo de Borracha & Alicates <span>A Força Bruta Segura</span></h4>
-                            <p><strong>Martelo:</strong> Serve para encaixar peças de MDF e fundos de gaveta sem marcar ou rachar a superfície. Imprescindível.<br>
-                            <strong>Alicates:</strong> Um Universal e um de Bico. Usados para fixar prendedores, ajustar molas e puxar pregos tortos.</p>
-                        </div>
-                    </div>
-
-                    <div class="tool-item">
-                        <div class="tool-img"><i class="fas fa-ruler-combined"></i></div>
-                        <div class="tool-info">
-                            <h4>05. Esquadro, Estilete & Organizador <span>O Acabamento</span></h4>
-                            <p><strong>Esquadro Metálico (30cm):</strong> Para verificar ângulos retos em armários.<br>
-                            <strong>Estilete (Cabo Grosso):</strong> Cortar plásticos, fitas de borda e papelões pesados com segurança.<br>
-                            <strong>Bolsa de Lona:</strong> Organiza tudo. Mochilas ou bolsas de lona são melhores que caixas de plástico rígido pesadas.</p>
-                        </div>
-                    </div>
-
                 </div>
             </section>
 
-            <!-- CAP 4 & 6: CUSTOS E ONDE COMPRAR -->
+            <!-- CAP 4: SALVANDO PEÇAS (GAMBIARRAS PROFISSIONAIS) -->
             <section id="cap4">
                 <div class="sec-header">
-                    <h2 class="sec-title"><i class="fas fa-wallet"></i> Custos Realistas (2025/2026)</h2>
-                    <p>Pesquisa atualizada. Se o orçamento apertar, priorize a coluna "Não Economize". Para os demais, o básico resolve.</p>
+                    <h2 class="sec-title"><i class="fas fa-medkit"></i> Primeiros Socorros do Montador</h2>
+                    <p>Nem sempre a culpa é sua. Às vezes a fábrica fura errado, a peça empena ou a furação espana. Veja como salvar a montagem e não precisar pedir peça de reposição (o que atrasaria seu pagamento em 30 dias).</p>
                 </div>
 
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Ferramenta</th>
-                                <th>Faixa Econômica</th>
-                                <th>Recomendada</th>
-                                <th>Não Economize?</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Furadeira / Parafusadeira</td>
-                                <td>R$ 80 – 150</td>
-                                <td><strong style="color:var(--green)">R$ 250 – 350</strong></td>
-                                <td><span class="td-alert">SIM</span></td>
-                            </tr>
-                            <tr>
-                                <td>Jogo de Brocas (10 pcs)</td>
-                                <td>R$ 15 – 25</td>
-                                <td><strong style="color:var(--green)">R$ 40 – 70</strong></td>
-                                <td><span class="td-alert">SIM</span></td>
-                            </tr>
-                            <tr>
-                                <td>Jogo de Chaves (Fenda/Philips)</td>
-                                <td>R$ 15 – 25</td>
-                                <td><strong style="color:var(--green)">R$ 30 – 55</strong></td>
-                                <td><span class="td-alert">SIM</span></td>
-                            </tr>
-                            <tr>
-                                <td>Trena 5m</td>
-                                <td>R$ 10 – 18</td>
-                                <td><strong style="color:var(--green)">R$ 20 – 35</strong></td>
-                                <td>Pode economizar</td>
-                            </tr>
-                            <tr>
-                                <td>Nível de Bolha 60cm</td>
-                                <td>R$ 18 – 28</td>
-                                <td><strong style="color:var(--green)">R$ 30 – 50</strong></td>
-                                <td>Pode economizar</td>
-                            </tr>
-                            <tr>
-                                <td>Martelo de Borracha</td>
-                                <td>R$ 12 – 20</td>
-                                <td><strong style="color:var(--green)">R$ 22 – 38</strong></td>
-                                <td>Pode economizar</td>
-                            </tr>
-                            <tr>
-                                <td>Jogo de Alicates</td>
-                                <td>R$ 20 – 35</td>
-                                <td><strong style="color:var(--green)">R$ 40 – 65</strong></td>
-                                <td><span class="td-alert">SIM</span></td>
-                            </tr>
-                            <tr>
-                                <td>Bolsa organizadora</td>
-                                <td>R$ 30 – 50</td>
-                                <td><strong style="color:var(--green)">R$ 55 – 85</strong></td>
-                                <td>Pode economizar</td>
-                            </tr>
-                            <tr style="background: rgba(249,115,22,0.1);">
-                                <td><strong>TOTAL ESTIMADO</strong></td>
-                                <td><strong>R$ 198 – 333</strong></td>
-                                <td><strong style="color:var(--orange)">R$ 321 – 502</strong></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="pro-tip" style="margin-top: 20px;">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span><strong>Onde Comprar?</strong> Use lojas físicas (Ferragens/Home Centers) para <strong>Furadeira e Alicates</strong>, pois você precisa testar o peso, a pegada e o encaixe da mão. Para o restante (trenas, níveis, chaves), Mercado Livre e Shopee oferecem custo-benefício insuperável.</span>
+                <div class="step-list">
+                    <div class="step-item">
+                        <div class="step-num" style="color:var(--red); border-color:var(--red);">A</div>
+                        <div class="step-text">
+                            <p><strong>Furo do Parafuso Espanado (MDF Esfarelou):</strong><br>
+                            Nunca entregue um móvel com parafuso bambo. Pegue alguns palitos de dente ou de fósforo, quebre dentro do buraco com algumas gotas de cola branca e coloque o parafuso novamente. A madeira vai inchar e o parafuso ficará firme como uma rocha.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num" style="color:var(--red); border-color:var(--red);">B</div>
+                        <div class="step-text">
+                            <p><strong>Peça Levemente Empenada (Torta):</strong><br>
+                            Se uma prateleira ou lateral veio levemente curvada, monte-a mesmo assim, mas deixe o lado "estufado" forçando contra a estrutura rígida. Na hora de pregar o fundo, force o móvel para a posição correta e crave muitos pregos. O fundo puxa a peça para o lugar e retira o empenamento.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num" style="color:var(--red); border-color:var(--red);">C</div>
+                        <div class="step-text">
+                            <p><strong>Risco ou Lasca na Madeira Visível:</strong><br>
+                            Acidentes acontecem. Se o piso lascou a quina da porta ou a chave de fenda escapou, use a técnica do <em>giz de cera para madeira</em> (vendido em lojas de ferragens). Passe sobre o risco e esfregue um pano até nivelar. A imperfeição some em 90% dos casos.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- CAP 5: O QUE NÃO COMPRAR -->
-            <section id="cap5">
+            <!-- CAP 5: CHECKLIST DE QUALIDADE -->
+            <section id="cap5-checklist" style="border-bottom: none;">
                 <div class="sec-header">
-                    <h2 class="sec-title" style="color: var(--red);"><i class="fas fa-ban"></i> O que NÃO comprar no início</h2>
-                    <p>Fique longe destas "compras arrependidas" muito comuns entre os novatos.</p>
+                    <h2 class="sec-title" style="color: var(--green);"><i class="fas fa-clipboard-check"></i> Controle de Qualidade Pós-Montagem</h2>
+                    <p>Nunca chame o cliente sem antes passar por este checklist de verificação final. É isso que vai garantir sua gorjeta e uma indicação de 5 estrelas.</p>
                 </div>
 
-                <div class="dont-buy-list">
-                    <div class="dont-buy-card">
-                        <i class="fas fa-times-circle"></i>
-                        <div>
-                            <h4>Serra Circular / Serra Tico-Tico</h4>
-                            <p>Você não vai cortar MDF nos primeiros serviços — as peças já vêm cortadas de fábrica. Se precisar, terceirize na madeireira e poupe os R$ 200–600 agora.</p>
-                        </div>
-                    </div>
-                    <div class="dont-buy-card">
-                        <i class="fas fa-times-circle"></i>
-                        <div>
-                            <h4>Kit Completo de Ferragens (100+ peças genéricas)</h4>
-                            <p>As dobradiças, corrediças e puxadores já vêm na caixa do móvel ou são dadas pelo cliente. Você vai acabar carregando peso morto.</p>
-                        </div>
-                    </div>
-                    <div class="dont-buy-card">
-                        <i class="fas fa-times-circle"></i>
-                        <div>
-                            <h4>Furadeira de Impacto Bruta</h4>
-                            <p>Ótima para parede e concreto, mas para montagem em MDF o impacto destrói a madeira. A parafusadeira de 20V comum faz tudo que você precisa no móvel.</p>
-                        </div>
-                    </div>
-                    <div class="dont-buy-card">
-                        <i class="fas fa-times-circle"></i>
-                        <div>
-                            <h4>Caixas de Ferramentas Rígidas (Plástico/Metal)</h4>
-                            <p>Você vai andar de casa em casa, subir escadas, entrar em elevadores. Uma caixa rígida batendo na perna é exaustivo. Prefira bolsas ou mochilas de lona.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CAP 7: MANUTENÇÃO -->
-            <section id="cap7">
-                <div class="sec-header">
-                    <h2 class="sec-title"><i class="fas fa-spray-can"></i> Manutenção do Arsenal</h2>
-                </div>
-                <div class="grid-3">
-                    <div class="error-card" style="border-top-color: var(--green);">
-                        <h4 style="color:var(--green);"><i class="fas fa-broom" style="color:var(--green)"></i> Limpeza Básica</h4>
-                        <p>Poeira de MDF entra na ventilação da furadeira e reduz a vida útil do motor. Passe um pano ou pincel seco após o expediente.</p>
-                    </div>
-                    <div class="error-card" style="border-top-color: var(--green);">
-                        <h4 style="color:var(--green);"><i class="fas fa-battery-half" style="color:var(--green)"></i> Regra da Bateria</h4>
-                        <p>Baterias de lítio odeiam extremos. Guarde-as sempre entre 40% e 80% de carga. Não deixe na tomada de um dia para o outro.</p>
-                    </div>
-                    <div class="error-card" style="border-top-color: var(--green);">
-                        <h4 style="color:var(--green);"><i class="fas fa-oil-can" style="color:var(--green)"></i> Lubrificação</h4>
-                        <p>Um pequeno jato de WD-40 a cada 3 meses nas engrenagens dos alicates e estilete garante movimentos suaves e previne ferrugem.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CAP 8: CHECKLIST INTERATIVO -->
-            <section id="cap8-checklist" style="border-bottom: none;">
                 <div class="checklist-wrapper">
                     <div class="cl-header">
                         <div>
-                            <h2 style="font-size: 1.8rem; margin-bottom: 5px;">Checklist do Montador</h2>
-                            <p style="color: var(--text-muted); font-size: 0.95rem;">Marque os itens enquanto monta sua bolsa. Nós salvamos seu progresso.</p>
+                            <h2 style="font-size: 1.5rem; margin-bottom: 5px;">A Verificação do Profissional</h2>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Realize esta inspeção antes de limpar o ambiente e entregar o móvel.</p>
                         </div>
                         <div style="font-family: var(--font-title); font-size: 1.5rem; font-weight: 800; color: var(--green);" id="cl-percent">
                             0%
@@ -542,12 +378,12 @@
                     </div>
 
                     <div class="cl-actions">
-                        <button class="btn-clear" id="btn-clear-checklist"><i class="fas fa-trash-alt"></i> Limpar Checklist</button>
+                        <button class="btn-clear" id="btn-clear-checklist"><i class="fas fa-undo"></i> Reiniciar Verificação</button>
                     </div>
                 </div>
 
-                <a href="#" class="btn-finish" onclick="alert('Funcionalidade de navegação. No ambiente real, avança para o Módulo 2.'); return false;">
-                    Concluir e Ir para Módulo 02 <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                <a href="#" class="btn-finish" onclick="alert('Funcionalidade de navegação. No ambiente real, avança para a FASE 3 (Módulo 4).'); return false;">
+                    Concluir FASE 2 e ir para Módulo 04 <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
                 </a>
 
             </section>
@@ -557,27 +393,20 @@
 
     <script>
         // ==========================================
-        // SISTEMA DE CHECKLIST INTERATIVO
+        // SISTEMA DE CHECKLIST INTERATIVO - QUALIDADE
         // ==========================================
         const checklistItems =[
-            { id: 'chk_01', text: 'Furadeira / Parafusadeira Bivolt', tag: 'N1' },
-            { id: 'chk_02', text: 'Jogo de Brocas (madeira + metal)', tag: 'N1' },
-            { id: 'chk_03', text: 'Jogo de Chaves de Fenda (P, M, G)', tag: 'N1' },
-            { id: 'chk_04', text: 'Trena (Mínimo 5m)', tag: 'N1' },
-            { id: 'chk_05', text: 'Nível de Bolha (60cm)', tag: 'N1' },
-            { id: 'chk_06', text: 'Martelo de Borracha', tag: 'N1' },
-            { id: 'chk_07', text: 'Alicate Universal + Alicate de Bico', tag: 'N1' },
-            { id: 'chk_08', text: 'Esquadro Metálico (30cm)', tag: 'N1' },
-            { id: 'chk_09', text: 'Estilete (Cabo grosso)', tag: 'N1' },
-            { id: 'chk_10', text: 'Bolsa ou Mochila Organizadora', tag: 'N1' },
-            { id: 'chk_11', text: 'Bateria Carregada (Levar reserva se tiver)', tag: 'N1' },
-            { id: 'chk_12', text: 'Parafusos MDF 3,5x35mm (Pote de emergência)', tag: 'N1' },
-            { id: 'chk_13', text: 'Buchas de Parede 6mm / 8mm (Mínimo 20)', tag: 'N1' },
-            { id: 'chk_14', text: 'Fita Dupla-Face e Fita Crepe', tag: 'N2' },
-            { id: 'chk_15', text: 'Lápis de carpinteiro ou Caneta marcadora', tag: 'N1' }
+            { id: 'm3_01', text: 'Portas alinhadas: A distância entre elas está simétrica e não há "vão" no meio.', tag: 'Visual' },
+            { id: 'm3_02', text: 'Batida suave: Nenhuma porta ou gaveta está raspando ao fechar ou abrir.', tag: 'Funcional' },
+            { id: 'm3_03', text: 'Estrutura firme: Empurre o móvel levemente pela lateral. Ele não deve balançar ou fazer barulho de estalo.', tag: 'Estrutura' },
+            { id: 'm3_04', text: 'Esquadro conferido: Verificou se o móvel está torto no ambiente (às vezes o problema é o piso da casa, use calços discretos se necessário).', tag: 'Estrutura' },
+            { id: 'm3_05', text: 'Puxadores firmes: Estão bem apertados e alinhados (não rodam na mão).', tag: 'Acabamento' },
+            { id: 'm3_06', text: 'Limpeza do móvel: Passou um pano seco (ou levemente úmido) para tirar a marca de dedos e pó do MDF nas áreas visíveis.', tag: 'Estética' },
+            { id: 'm3_07', text: 'Tampas de parafusos: Aplicou todos os adesivos tapa-furos que vêm no kit, ocultando as ferragens metálicas.', tag: 'Estética' },
+            { id: 'm3_08', text: 'Limpeza do ambiente: Varreu a serragem do chão, dobrou o papelão das caixas e jogou os plásticos no lixo.', tag: 'Atendimento' }
         ];
 
-        const STORAGE_KEY = 'montador_checklist_mod1';
+        const STORAGE_KEY = 'montador_checklist_mod3';
         let savedState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
         
         const container = document.getElementById('checklist-container');
@@ -634,7 +463,7 @@
             
             if (percentage === 100) {
                 progressText.style.color = 'var(--green)';
-                progressText.innerHTML = '<i class="fas fa-check-circle"></i> 100%';
+                progressText.innerHTML = '<i class="fas fa-check-circle"></i> Móvel Aprovado!';
             } else {
                 progressText.style.color = 'var(--orange)';
             }
@@ -642,7 +471,7 @@
 
         // Limpa o checklist
         btnClear.addEventListener('click', () => {
-            if (confirm('Tem certeza que deseja limpar todo o checklist?')) {
+            if (confirm('Tem certeza que deseja reiniciar o checklist de qualidade?')) {
                 savedState = {};
                 localStorage.removeItem(STORAGE_KEY);
                 renderChecklist();
